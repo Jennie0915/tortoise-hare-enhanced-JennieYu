@@ -39,6 +39,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
 .track-wrapper {
   max-width: 900px;
   margin: 0 auto;
