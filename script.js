@@ -3,17 +3,28 @@ const TRACK_LENGTH = 70; //sometimes constant variables are all caps
 const startBtn = document.getElementById("startBtn");
 const messageEl = document.getElementById("message");
 const trackEl = document.getElementById("track");
+const tortoiseScoreEl = document.getElementById("tortoiseScore");
+const hareScoreEl = document.getElementById("hareScore");
 
 let tortoisePosition = 1;
 let harePosition = 1;
 let raceIntervalId = null;
 let stepCount = 0;
 
+//scoreboard win counters
+let tortoiseWins = 0;
+let hareWins = 0;
+
 startBtn.addEventListener("click", startRace);
 
 //start the race with a button click
 //trigger the move every second (setInterval())
 function startRace() {
+  //reset positions for new race (wins stay!)
+  tortoisePosition = 1;
+  harePosition = 1;
+  stepCount = 0;
+
   messageEl.textContent = "BANG! AND THEY'RE OFF!!!!";
 
   startBtn.disabled = true;
@@ -112,12 +123,21 @@ function showResult() {
   if (tortoisePosition >= TRACK_LENGTH && harePosition >= TRACK_LENGTH) {
     messageEl.textContent = "It's a tie!";
   } else if (tortoisePosition >= TRACK_LENGTH) {
+    tortoiseWins++;
     messageEl.textContent = "TORTOISE WINS! YAY!!!";
   } else if (harePosition >= TRACK_LENGTH) {
+    hareWins++;
     messageEl.textContent = "HARE WINS, Yuck!";
   } else {
     messageEl.textContent = "";
   }
+  updateScoreboard();
+}
+
+//update the scoreboard display in the DOM
+function updateScoreboard() {
+  tortoiseScoreEl.textContent = "Tortoise: " + tortoiseWins + " wins";
+  hareScoreEl.textContent = "Hare: " + hareWins + " wins";
 }
 
 //Initial render of the empty track
